@@ -48,7 +48,6 @@ app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
     };
 
     $scope.loginUser = function (login) {
-            console.log("hhh");
         $http({
             method: 'POST',
             url: "/Token",

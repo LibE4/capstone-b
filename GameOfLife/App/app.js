@@ -14,7 +14,12 @@ app.config(function ($routeProvider) {
 		    templateUrl: 'App/partials/auth.html',
 		    controller: 'AuthCtrl'
 		})
-		.when('/game', {
+		.when('/chat', {
+		    templateUrl: 'App/partials/chat.html',
+		    controller: 'ChatCtrl',
+		    resolve: { isAuth }
+		})
+        .when('/game', {
 		    templateUrl: 'App/partials/game.html',
 		    controller: 'GameCtrl',
 		    resolve: { isAuth }

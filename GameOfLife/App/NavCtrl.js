@@ -6,6 +6,10 @@ app.controller("NavCtrl", ["$scope", "$rootScope", "$location", function ($scope
 		    url: "/logout"
 		},
 		{
+		    name: "Chat",
+		    url: "/chat"
+		},
+		{
 		    name: "All Patterns",
 		    url: "/pattern/list"
 		},

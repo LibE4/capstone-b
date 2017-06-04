@@ -9,7 +9,8 @@ namespace GameOfLife
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.signalR-2.2.2.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -27,11 +28,7 @@ namespace GameOfLife
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                       "~/Scripts/angular.js",
                       "~/Scripts/angular-route.js",
-                      "~/App/app.js",
-                      "~/App/AuthCtrl.js",
-                      "~/App/NavCtrl.js",
-                      "~/App/GameCtrl.js",
-                      "~/App/PatternNewCtrl.js"
+                      "~/App/*.js"
                       ));
         }
     }
