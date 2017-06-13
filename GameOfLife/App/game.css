@@ -16,7 +16,10 @@
   -webkit-font-smoothing: antialiased; }
 
 html, body {
-  height: 100%; }
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   color: #CCCECB;
@@ -26,16 +29,6 @@ body h1, body h2 {
 body .row {
   margin: 0;
   padding: 0; }
-#ttt_small {
-      background: #FFA700;
-      width: 300px;
-      height: 300px;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-content: space-between;
-    }
 #ttt {
       background: #FFA700;
       width: 600px;
@@ -46,19 +39,11 @@ body .row {
       justify-content: space-between;
       align-content: space-between;
     }
-#ttt .blocks, #ttt_small  .blocks {
+#ttt .blocks {
       box-sizing: border-box;
       border: 1px solid white;
       margin: auto;
       text-align: center; }
-body #sg-container .blocks:before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  height: 100%; }
-body #sg-container .messages-card {
-  margin-top: 0; }
-
 
 /*chat*/
     .reveal .fa {

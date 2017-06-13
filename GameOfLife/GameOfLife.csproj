@@ -286,6 +286,10 @@
     <Compile Include="Migrations\201706050436169_patterndetail2.Designer.cs">
       <DependentUpon>201706050436169_patterndetail2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706131846459_pattern.cs" />
+    <Compile Include="Migrations\201706131846459_pattern.Designer.cs">
+      <DependentUpon>201706131846459_pattern.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -303,8 +307,9 @@
     <Content Include="App\AuthCtrl.js" />
     <Content Include="App\ChatCtrl.js" />
     <Content Include="App\game.css" />
-    <Content Include="App\partials\Show.html" />
+    <Content Include="App\partials\PatternEdit.html" />
     <Content Include="App\PatternCopyCtrl.js" />
+    <Content Include="App\PatternEditCtrl.js" />
     <Content Include="App\PatternSmallCtrl.js" />
     <Content Include="App\HomeCtrl.js" />
     <Content Include="App\NavCtrl.js" />
@@ -314,10 +319,9 @@
     <Content Include="App\partials\home.html" />
     <Content Include="App\partials\navbar.html" />
     <Content Include="App\partials\PatternAll.html" />
-    <Content Include="App\partials\PatternBig.html" />
+    <Content Include="App\partials\Pattern.html" />
     <Content Include="App\PatternAllCtrl.js" />
-    <Content Include="App\PatternBigCtrl.js" />
-    <Content Include="App\ShowCtrl.js" />
+    <Content Include="App\PatternCtrl.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -407,6 +411,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706050436169_patterndetail2.resx">
       <DependentUpon>201706050436169_patterndetail2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706131846459_pattern.resx">
+      <DependentUpon>201706131846459_pattern.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

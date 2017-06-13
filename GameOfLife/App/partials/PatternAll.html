@@ -10,15 +10,25 @@
 </div>
 
 <h3>Patterns:</h3>
-<div ng-repeat="item in items | filter: searchText">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="col-sm-9"><a ng-click="loadItem(item)">{{item.Name}}</a></div>
-            <div class="col-sm-1"><button class="btn btn-danger fa fa-pencil-square-o" ng-click="editItem(item.Id)"></button></div>
-            <div class="col-sm-1"><button class="btn btn-danger fa fa-trash-o" ng-click="deleteItem(item.Id)"></button></div>
-        </div>
-    </div>
-</div>
 
-
-    
+<div class="row">
+    <table class="table table-striped table-user-information">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items | filter: searchText">
+                <td class="col-sm-2"><a ng-click="loadItem(item)">{{item.Name}}</a></td>
+                <td class="col-sm-8">{{item.Description}}</td>
+                <td class="col-sm-2">
+                    <button class="btn btn-info fa fa-pencil-square-o" ng-click="editItem(item.Id)"></button> || 
+                    <button class="btn btn-danger fa fa-trash-o" ng-click="deleteItem(item.Id)"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> 

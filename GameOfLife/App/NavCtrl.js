@@ -14,13 +14,9 @@ app.controller("NavCtrl", ["$scope", "$rootScope", "$location", function ($scope
 		    url: "/pattern/all"
 		},
 		{
-		    name: "New Big Pattern",
-		    url: "/pattern/big"
-		},
-        {
-        	name: "New Small Pattern",
-        	url: "/pattern/small"
-        }
+		    name: "New Pattern",
+		    url: "/pattern"
+		}
     ];
 
     $scope.loadPartials = function (link) {

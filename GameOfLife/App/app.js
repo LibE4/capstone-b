@@ -19,14 +19,14 @@ app.config(function ($routeProvider) {
 		    controller: 'ChatCtrl',
 		    resolve: { isAuth }
 		})
-        .when('/pattern/small', {
-		    templateUrl: 'App/partials/PatternSmall.html',
-		    controller: 'PatternSmallCtrl',
+        .when('/pattern/edit/:id', {
+		    templateUrl: 'App/partials/PatternEdit.html',
+		    controller: 'PatternEditCtrl',
 		    resolve: { isAuth }
 		})
-        .when('/pattern/big', {
-        	templateUrl: 'App/partials/PatternBig.html',
-        	controller: 'PatternBigCtrl',
+        .when('/pattern', {
+        	templateUrl: 'App/partials/Pattern.html',
+        	controller: 'PatternCtrl',
         	resolve: { isAuth }
         })
 		.when('/pattern/all', {

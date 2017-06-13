@@ -27,8 +27,12 @@
                 for (var i = 0, len = res.data.length; i < len; i++) {
                     $rootScope.patternName = item.Name;
                     $rootScope.patternDetails.push(res.data[i].Coordinate);
-                    $location.url("/pattern/big");
+                    $location.url("/pattern");
                 }
             });
+    }
+
+    $scope.editItem = function (itemId) {
+        $location.url("/pattern/edit/" + itemId);
     }
 }]);

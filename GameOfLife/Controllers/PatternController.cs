@@ -64,12 +64,13 @@ namespace GameOfLife.Controllers
             _context.SaveChanges();
         }
 
-        [Route("api/edit")]
+        [Route("api/pattern")]
         [HttpPut]
         public void Edit(Pattern item)
         {
             Pattern x = _context.Patterns.Find(item.Id);
             x.Name = item.Name;
+            x.Description = item.Description;
             _context.Entry(x).State = EntityState.Modified;
             _context.SaveChanges();
         }

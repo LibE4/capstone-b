@@ -1,5 +1,5 @@
 ﻿
-app.controller("PatternBigCtrl", ['$scope', '$http', '$location', '$rootScope', function ($scope, $http, $location, $rootScope) {
+app.controller("PatternCtrl", ['$scope', '$http', '$location', '$rootScope', function ($scope, $http, $location, $rootScope) {
     let pattern_input = [], nGridX = 50, nGridY = 50;
     let n = nGridX;
     let gridSize = 10, startOffsetX = 0, startOffsetY = 0;
