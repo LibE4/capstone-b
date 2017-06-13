@@ -13,7 +13,7 @@ app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
     $scope.login.username = 'b@b.com';
     $scope.login.password = '123456Nss!';
 
-    if ($location.path() == "/logout") {
+    if ($location.path() === "/logout") {
         sessionStorage.removeItem('token');
         $http.defaults.headers.common['Authorization'] = "";
         $rootScope = {};
@@ -65,7 +65,7 @@ app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
             sessionStorage.setItem('token', result.data.access_token);
             $rootScope.user = result.data;
             $http.defaults.headers.common['Authorization'] = `bearer ${result.data.access_token}`;
-            $location.url("/game");
+            $location.url("/base");
         });
     };
 

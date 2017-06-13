@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -101,6 +105,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
       <Private>True</Private>
@@ -254,7 +259,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatternController.cs" />
     <Compile Include="Controllers\PatternDetailController.cs" />
+    <Compile Include="Controllers\StaticValues.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DAL\IPatternRepository.cs" />
+    <Compile Include="DAL\PatternRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -270,9 +278,18 @@
     <Compile Include="Migrations\201706032200344_pattern1.Designer.cs">
       <DependentUpon>201706032200344_pattern1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706050010057_patterndetail.cs" />
+    <Compile Include="Migrations\201706050010057_patterndetail.Designer.cs">
+      <DependentUpon>201706050010057_patterndetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706050436169_patterndetail2.cs" />
+    <Compile Include="Migrations\201706050436169_patterndetail2.Designer.cs">
+      <DependentUpon>201706050436169_patterndetail2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Chat.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Pattern.cs" />
     <Compile Include="Models\PatternDetail.cs" />
@@ -286,14 +303,21 @@
     <Content Include="App\AuthCtrl.js" />
     <Content Include="App\ChatCtrl.js" />
     <Content Include="App\game.css" />
-    <Content Include="App\GameCtrl.js" />
+    <Content Include="App\partials\Show.html" />
+    <Content Include="App\PatternCopyCtrl.js" />
+    <Content Include="App\PatternSmallCtrl.js" />
+    <Content Include="App\HomeCtrl.js" />
     <Content Include="App\NavCtrl.js" />
     <Content Include="App\partials\auth.html" />
     <Content Include="App\partials\Chat.html" />
-    <Content Include="App\partials\game.html" />
+    <Content Include="App\partials\PatternSmall.html" />
+    <Content Include="App\partials\home.html" />
     <Content Include="App\partials\navbar.html" />
-    <Content Include="App\partials\PatternNew.html" />
-    <Content Include="App\PatternNewCtrl.js" />
+    <Content Include="App\partials\PatternAll.html" />
+    <Content Include="App\partials\PatternBig.html" />
+    <Content Include="App\PatternAllCtrl.js" />
+    <Content Include="App\PatternBigCtrl.js" />
+    <Content Include="App\ShowCtrl.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -377,6 +401,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706032200344_pattern1.resx">
       <DependentUpon>201706032200344_pattern1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706050010057_patterndetail.resx">
+      <DependentUpon>201706050010057_patterndetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706050436169_patterndetail2.resx">
+      <DependentUpon>201706050436169_patterndetail2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

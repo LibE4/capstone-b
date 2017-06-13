@@ -5,6 +5,7 @@ using System.Web;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
 using System.Timers;
 
 namespace GameOfLife.Hubs
@@ -12,15 +13,34 @@ namespace GameOfLife.Hubs
     public class World : IGameOfLife
     {
         public int[,] worldArr = new int[50, 50];
-        public int startOffsetX = 20, startOffsetY = 20;
+        public int startOffsetX = 0, startOffsetY = 0;
         public List<string> about_to_die = new List<string>(); // List of cells marked to die
         public List<string> about_to_born = new List<string>(); // List of cells marked to born
+        private readonly IHubContext _hubContext;
+        private string _userConnectonId;
+        public System.Timers.Timer aTimer { get; set; }
+
         public World()
         {
         }
 
-        public World(string[] live_cells)
+        public World(string[] live_cells, string userConnectonId, string sendTo)
         {
+            _userConnectonId = userConnectonId;
+            _hubContext = GlobalHost.ConnectionManager.GetHubContext<GameHub>();
+            if (sendTo == "all")
+            {
+                aTimer = new System.Timers.Timer();
+                aTimer.Elapsed += new ElapsedEventHandler(updateToAll);
+                aTimer.Interval = 200;
+                aTimer.Enabled = true;
+            } else
+            {
+                aTimer = new System.Timers.Timer();
+                aTimer.Elapsed += new ElapsedEventHandler(updateToSelf);
+                aTimer.Interval = 200;
+                aTimer.Enabled = true;
+            }
             for (int i = 0; i < live_cells.Length; i++)
             {
                 Match match = Regex.Match(live_cells[i], @"(\d+),(\d+)");
@@ -28,14 +48,21 @@ namespace GameOfLife.Hubs
                 int y = int.Parse(match.Groups[2].Value);
                 worldArr[x + startOffsetX, y + startOffsetY] = 1;
             }
-            System.Timers.Timer aTimer = new System.Timers.Timer();
-            aTimer.Elapsed += new ElapsedEventHandler(Tick);
-            aTimer.Interval = 500;
-            aTimer.Enabled = true;
         }
 
-			
-        public void Tick(object sender, EventArgs e) // Passage of time
+	    public void updateToSelf(object sender, EventArgs e)
+        {
+            Tick();
+            _hubContext.Clients.Client(_userConnectonId).addNewGameDataToPage(worldArr, _userConnectonId);
+        }
+
+        public void updateToAll(object sender, EventArgs e)
+        {
+            Tick();
+            _hubContext.Clients.All.addNewGameDataToPage(worldArr, _userConnectonId);
+        }
+
+        public void Tick() // Passage of time
         {
             LiveOn(null);
             Reproduction(null);
@@ -44,8 +71,6 @@ namespace GameOfLife.Hubs
 
             KillCells();
             BirthCells();
-            var hubContext = GlobalHost.ConnectionManager.GetHubContext<GameHub>();
-            hubContext.Clients.All.addNewGameDataToPage(worldArr);
             about_to_die = new List<string>();
             about_to_born = new List<string>();
         }
@@ -159,7 +184,7 @@ namespace GameOfLife.Hubs
             }
             else
                 return 0;
-
         }
+
     }
 }

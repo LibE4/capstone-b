@@ -20,9 +20,9 @@ namespace GameOfLife.Controllers
         }
 
         [Route("api/patterndetail/{id}")]
-        public PatternDetail GetOne(int id)
+        public List<PatternDetail> GetOne(int id)
         {
-            return _context.PatternDetails.Find(id);
+            return _context.PatternDetails.Where(x => x.PatternId == id).ToList();
         }
 
         [Route("api/patterndetail")]
@@ -39,12 +39,12 @@ namespace GameOfLife.Controllers
             _context.SaveChanges();
         }
 
-        [Route("api/delete/{id}")]
-        [HttpPost]
+        [Route("api/patterndetail/{id}")]
+        [HttpDelete]
         public void Delete(int id)
         {
-            PatternDetail x = _context.PatternDetails.Find(id);
-            _context.PatternDetails.Remove(x);
+            List<PatternDetail> x = GetOne(id);
+            _context.PatternDetails.RemoveRange(x);
             _context.SaveChanges();
         }
 
@@ -53,8 +53,7 @@ namespace GameOfLife.Controllers
         public void Edit(PatternDetail item)
         {
             PatternDetail w = _context.PatternDetails.Find(item.Id);
-            w.X = item.X;
-            w.Y = item.Y;
+            w.Coordinate = item.Coordinate;
             _context.Entry(w).State = EntityState.Modified;
             _context.SaveChanges();
         }

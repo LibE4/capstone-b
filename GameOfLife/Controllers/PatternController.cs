@@ -1,4 +1,5 @@
-﻿using GameOfLife.Models;
+﻿using GameOfLife.DAL;
+using GameOfLife.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,18 @@ namespace GameOfLife.Controllers
   
     public class PatternController : ApiController
     {
+        readonly IPatternRepository _repo;
         private ApplicationDbContext _context;
-
-        //Use Dependency Injection instead
         public PatternController()
         {
             _context = new ApplicationDbContext();
+            _repo = new PatternRepository();
         }
+        public PatternController(IPatternRepository repo)
+        {
+            _repo = repo;
+        }
+
         [Route("api/pattern/{id}")]
         [HttpGet]
         public Pattern GetOne(int id)
@@ -32,7 +38,8 @@ namespace GameOfLife.Controllers
         [HttpGet]
         public List<Pattern> GetAll()
         {
-            return _context.Patterns.ToList();
+            var uid = User.Identity.GetUserId();
+            return _context.Patterns.Where(x => x.UID == uid).ToList();
         }
 
         [Route("api/pattern")]
@@ -44,12 +51,12 @@ namespace GameOfLife.Controllers
                 Name = value.Name.Value, // JToken
                 UID = User.Identity.GetUserId()
             };
-            _context.Patterns.Add(newPattern);
-            _context.SaveChanges();
+            StaticValues.newPatternDetail = value.newPatternDetail.ToObject<string[]>();
+            _repo.Save(newPattern);
         }
 
-        [Route("api/delete/{id}")]
-        [HttpPost]
+        [Route("api/pattern/{id}")]
+        [HttpDelete]
         public void Delete(int id)
         {
             Pattern x = _context.Patterns.Find(id);

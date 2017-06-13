@@ -19,19 +19,28 @@ app.config(function ($routeProvider) {
 		    controller: 'ChatCtrl',
 		    resolve: { isAuth }
 		})
-        .when('/game', {
-		    templateUrl: 'App/partials/game.html',
-		    controller: 'GameCtrl',
+        .when('/pattern/small', {
+		    templateUrl: 'App/partials/PatternSmall.html',
+		    controller: 'PatternSmallCtrl',
 		    resolve: { isAuth }
 		})
-        .when('/pattern/new', {
-        	templateUrl: 'App/partials/PatternNew.html',
-        	controller: 'PatternNewCtrl',
+        .when('/pattern/big', {
+        	templateUrl: 'App/partials/PatternBig.html',
+        	controller: 'PatternBigCtrl',
         	resolve: { isAuth }
         })
-		.when('/logout', {
+		.when('/pattern/all', {
+		    templateUrl: 'App/partials/PatternAll.html',
+		    controller: 'PatternAllCtrl',
+		    resolve: { isAuth }
+		})
+        .when('/logout', {
 		    templateUrl: 'App/partials/auth.html',
 		    controller: 'AuthCtrl'
 		})
+        .when('/base', {
+            templateUrl: 'App/partials/home.html',
+            controller: 'HomeCtrl'
+        })
 		.otherwise('/auth');
 });

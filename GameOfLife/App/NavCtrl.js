@@ -11,12 +11,16 @@ app.controller("NavCtrl", ["$scope", "$rootScope", "$location", function ($scope
 		},
 		{
 		    name: "All Patterns",
-		    url: "/pattern/list"
+		    url: "/pattern/all"
 		},
 		{
-		    name: "New Pattern",
-		    url: "/pattern/new"
-		}
+		    name: "New Big Pattern",
+		    url: "/pattern/big"
+		},
+        {
+        	name: "New Small Pattern",
+        	url: "/pattern/small"
+        }
     ];
 
     $scope.loadPartials = function (link) {

@@ -1,0 +1,24 @@
+﻿<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+            </span>
+            <input type="text" class="form-control" placeholder="Search for ..." ng-model="searchText">
+        </div>
+    </div>
+</div>
+
+<h3>Patterns:</h3>
+<div ng-repeat="item in items | filter: searchText">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-sm-9"><a ng-click="loadItem(item)">{{item.Name}}</a></div>
+            <div class="col-sm-1"><button class="btn btn-danger fa fa-pencil-square-o" ng-click="editItem(item.Id)"></button></div>
+            <div class="col-sm-1"><button class="btn btn-danger fa fa-trash-o" ng-click="deleteItem(item.Id)"></button></div>
+        </div>
+    </div>
+</div>
+
+
+    
