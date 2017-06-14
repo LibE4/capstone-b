@@ -14,25 +14,41 @@ namespace GameOfLife.Hubs
     {
         [Authorize]
         [HubMethodName("ChatMessage")]
-        public void NewChatMessage(string name, string message)
+        public void NewChatMessage(string message)
         {
-            Clients.All.addNewMessageToPage(name, message);
+            string fromUserId = Context.ConnectionId;
+            var fromUser = loggedInUsers.FirstOrDefault(x => x.ConnectionId == fromUserId);
+            Clients.All.RecievingPrivateMessage(fromUser.name, fromUserId, message);
         }
 
 
-        static readonly HashSet<string> Rooms = new HashSet<string>();
         static List<user> loggedInUsers = new List<user>();
-        public string Login(string name)
+        public void Login(string name)
         {
-            var user = new user { name = name, ConnectionId = Context.ConnectionId, status = "Online" };
-            Clients.Caller.rooms(Rooms.ToArray());
-            Clients.Caller.setInitial(Context.ConnectionId, name);
+            var users = loggedInUsers.ToArray();
+            var len = users.Length;
+            if (len == 0)
+            {
+                var user = new user { name = name, ConnectionId = Context.ConnectionId, status = "Online" };
+                loggedInUsers.Add(user);
+                Clients.Others.newOnlineUser(user);
+            }
+            else
+            {
+                for (int i = 0; i < len; i++)
+                {
+                    if (users[i].ConnectionId == Context.ConnectionId) break;
+                    if (i == len - 1)
+                    {
+                        var user = new user { name = name, ConnectionId = Context.ConnectionId, status = "Online" };
+                        loggedInUsers.Add(user);
+                        Clients.Others.newOnlineUser(user);
+                    }
+                }
+            }
             var oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             string sJSON = oSerializer.Serialize(loggedInUsers);
             Clients.Caller.getOnlineUsers(sJSON);
-            loggedInUsers.Add(user);
-            Clients.Others.newOnlineUser(user);
-            return name;
         }
 
         public void SendPrivateMessage(string toUserId, string message)

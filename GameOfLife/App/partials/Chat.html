@@ -1,60 +1,59 @@
 ﻿<h2>Chat</h2>
 <div class="container">
-    <div class="alert-success " style="padding:8px; text-align:left ; text-wrap:initial; text-indent:each-line">Welcome {{currentUser.userName}}!!!</div>
-        <div id="OnlineUsers">
-            <div class="container">
-                <div class="row">
-                    <div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <span class="fa fa-users"></span>&nbsp; &nbsp; Online[{{OnlineUsers.length}}]
-                                <div class="btn-group pull-right">
-                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                        <span class="glyphicon glyphicon-chevron-down"></span>
-                                    </button>
-                                    <ul class="dropdown-menu slidedown">
-                                        <li>
-                                            <a ng-click="ChangeStatus('Online')">
-                                                <span class="glyphicon glyphicon-ok-sign">
-                                                </span>Available
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a ng-click="ChangeStatus('Busy')">
-                                                <span class="glyphicon glyphicon-remove">
-                                                </span>Busy
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a ng-click="ChangeStatus('Away')">
-                                                <span class="glyphicon glyphicon-time"></span>
-                                                Away
-                                            </a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="">
-                                                <span class="glyphicon glyphicon-off"></span>
-                                                Sign Out
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+    <div id="OnlineUsers">
+        <div class="container">
+            <div class="row">
+                <div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <span class="fa fa-users"></span>&nbsp; &nbsp; Online[{{OnlineUsers.length}}]
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </button>
+                                <ul class="dropdown-menu slidedown">
+                                    <li>
+                                        <a ng-click="ChangeStatus('Online')">
+                                            <span class="glyphicon glyphicon-ok-sign">
+                                            </span>Available
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="ChangeStatus('Busy')">
+                                            <span class="glyphicon glyphicon-remove">
+                                            </span>Busy
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="ChangeStatus('Away')">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                            Away
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="">
+                                            <span class="glyphicon glyphicon-off"></span>
+                                            Sign Out
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="panel-body" style="min-height:100px; max-height:600px;" ng-class="">
-                                <div class="media" ng-repeat="user in OnlineUsers track by $index">
-                                    <div class="media-body">
-                                        <h3 class="media-heading">
-                                            <strong>
-                                                <a ng-click="PrivateMessage($index)">
-                                                    <i class="fa fa-minus-circle" style="color:red" ng-show="user.status=='Busy'"></i>
-                                                    <i class="fa fa-circle" style="color:green" ng-show="user.status=='Online'"> </i>
-                                                    <i class="fa fa-history" style="color:orange" ng-show="user.status=='Away'">  </i>
-                                                    {{user.name}}
-                                                </a>
-                                            </strong>
-                                        </h3>
-                                    </div>
+                        </div>
+                        <div class="panel-body" style="min-height:100px; max-height:600px;" ng-class="">
+                            <div  ng-click="broadcastOn()">All</div>
+                            <div class="media" ng-repeat="user in OnlineUsers track by $index">
+                                <div class="media-body">
+                                    <h3 class="media-heading">
+                                        <strong>
+                                            <a ng-click="PrivateMessage($index)">
+                                                <i class="fa fa-minus-circle" style="color:red" ng-show="user.status=='Busy'"></i>
+                                                <i class="fa fa-circle" style="color:green" ng-show="user.status=='Online'"> </i>
+                                                <i class="fa fa-history" style="color:orange" ng-show="user.status=='Away'">  </i>
+                                                {{user.name}}
+                                            </a>
+                                        </strong>
+                                    </h3>
                                 </div>
                             </div>
                         </div>
@@ -62,6 +61,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
     <div id="PrivateChatArea" ng-show="ShowPrivateWindow">
 
@@ -89,8 +89,11 @@
                     <div class="input-group">
                         <input id="btn-input" type="text" class="form-control input-sm" ng-model="pvtmessage" placeholder="Type your message here..." ng-keypress="SkeyPress($event)" />
                         <span class="input-group-btn">
-                            <button class="btn btn-warning btn-sm" id="btn-chat" ng-click="SendPrivateMessage()">
+                            <button ng-hide="isBroadcastOn" class="btn btn-warning btn-sm" id="btn-chat" ng-click="SendPrivateMessage()">
                                 Send
+                            </button>
+                            <button ng-show="isBroadcastOn"  class="btn btn-warning btn-sm" id="btn-chat-all" ng-click="sendMsg()">
+                                Send To All
                             </button>
                         </span>
                     </div>

@@ -65,6 +65,8 @@ app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
             sessionStorage.setItem('token', result.data.access_token);
             $rootScope.user = result.data;
             $http.defaults.headers.common['Authorization'] = `bearer ${result.data.access_token}`;
+            $rootScope.connection = $.hubConnection();
+            $rootScope.chatHubProxy = $rootScope.connection.createHubProxy('ChatHub');
             $location.url("/base");
         });
     };

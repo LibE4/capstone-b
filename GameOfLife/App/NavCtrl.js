@@ -1,10 +1,7 @@
 ﻿
 app.controller("NavCtrl", ["$scope", "$rootScope", "$location", function ($scope, $rootScope, $location) {
     $scope.navItems = [
-		{
-		    name: "Logout",
-		    url: "/logout"
-		},
+
 		{
 		    name: "Chat",
 		    url: "/chat"

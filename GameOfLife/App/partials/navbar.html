@@ -13,8 +13,11 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right" ng-show="user">
+                <li><a class="navbar-nav-link" ng-click="loadPartials('/logout')">Logout {{user.userName}}</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right" ng-repeat="thing in navItems" ng-show="user">
-                <li class="btn btn-lg btn-success" ng-click="loadPartials(thing.url)">{{thing.name}}</li>
+                <li><a class="navbar-nav-link" ng-click="loadPartials(thing.url)">{{thing.name}}</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

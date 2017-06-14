@@ -1,19 +1,17 @@
 ﻿app.controller("ChatCtrl", ['$scope', '$rootScope', '$http', '$location', function ($scope, $rootScope, $http, $location) {
     $scope.Msgs = [];
 
-    var connection = $.hubConnection();
-    var chatHubProxy = connection.createHubProxy('ChatHub');
+    var connection = $rootScope.connection;
+    var chatHubProxy = $rootScope.chatHubProxy;
     chatHubProxy.on('addNewMessageToPage', function (name, message) {
-        console.log("received");
-        console.log(name + ' ' + message);
+        console.log("add");
         $scope.Msgs.push({ name: name, message: message });
         $scope.$apply();
     });
     connection.start().done(function () {
         // Wire up Send button to call NewChatMessage on the server.
         $scope.sendMsg = function () {
-        console.log("send");
-        chatHubProxy.invoke('ChatMessage', $rootScope.user.userName, $scope.message);
+        chatHubProxy.invoke('ChatMessage', $scope.pvtmessage);
         };
     });
 
@@ -21,33 +19,38 @@
     $scope.OnlineUsers = [];
     $scope.currentUser = $rootScope.user;
     connection.start().done(function () {
-        console.log($rootScope.user.userName);
         chatHubProxy.invoke('Login', $rootScope.user.userName);
     });
     chatHubProxy.on('GetOnlineUsers', function (onlineUsers) {
+        console.log("user");
         $scope.OnlineUsers = $.parseJSON(onlineUsers);
-        console.log("ddd", $scope.OnlineUsers);
         $scope.$apply();
     });
     chatHubProxy.on('NewOnlineUser', function (user) {
-        console.log("aa", user);
         $scope.OnlineUsers.push(user);
         $scope.$apply();
     });
 
     // direct message
     $scope.ShowPrivateWindow = false;
+    $scope.isBroadcastOn = false;
     $scope.UserInPrivateChat = null;
     $scope.PrivateMessages = [];
     $scope.currentprivatemessages = {};
     $scope.pvtmessage = '';
 
+    // opne broadcast window
+    $scope.broadcastOn = function () {
+        $scope.ShowPrivateWindow = true;
+        $scope.isBroadcastOn = true;
+        $scope.UserInPrivateChat = { name: "BroadCast To All" };
+    };
     // open PrivateMessage($index) window
     $scope.PrivateMessage = function (index) {
         var user = $scope.OnlineUsers[index];
         $scope.ShowPrivateWindow = true;
+        $scope.isBroadcastOn = false;
         $scope.UserInPrivateChat = user;
-        console.log($scope.OnlineUsers);
     };
     $scope.ClosePrivateWindow = function () {
         $scope.ShowPrivateWindow = false;
@@ -55,19 +58,15 @@
     };
     connection.start().done(function () {
         $scope.SendPrivateMessage = function () {
-            console.log("send: ", $scope.pvtmessage);
             chatHubProxy.invoke('SendPrivateMessage', $scope.UserInPrivateChat.ConnectionId, $scope.pvtmessage);
             $scope.pvtmessage = '';
         };
     });
     chatHubProxy.on('RecievingPrivateMessage', function (fromname, fromcid, msg) {
-        console.log("received");
-        console.log(fromname, msg);
         if ($scope.ShowPrivateWindow === false) {
             $scope.ShowPrivateWindow = true;
         }
         $scope.PrivateMessages.push({ from: fromname, message: msg });
-        console.log($scope.PrivateMessages);
 
         if ($scope.currentUser.userName !== fromname) // otheruser's pm
         {
@@ -110,7 +109,6 @@
             $scope.usertyping = msg;
         else
             $scope.usertyping = '';
-            console.log("outside", msg);
         $scope.$apply();
         window.setTimeout(function () {
             $scope.usertyping = '';
