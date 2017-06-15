@@ -7,6 +7,10 @@ app.controller("NavCtrl", ["$scope", "$rootScope", "$location", function ($scope
 		    url: "/chat"
 		},
 		{
+		    name: "Tetris",
+		    url: "/tetris"
+		},
+		{
 		    name: "All Patterns",
 		    url: "/pattern/all"
 		},

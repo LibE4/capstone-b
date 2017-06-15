@@ -269,6 +269,7 @@
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Hubs\GameHub.cs" />
     <Compile Include="Hubs\IGameOfLife.cs" />
+    <Compile Include="Hubs\Tetris.cs" />
     <Compile Include="Hubs\World.cs" />
     <Compile Include="Migrations\201706012002572_init.cs" />
     <Compile Include="Migrations\201706012002572_init.Designer.cs">
@@ -308,6 +309,8 @@
     <Content Include="App\ChatCtrl.js" />
     <Content Include="App\game.css" />
     <Content Include="App\partials\PatternEdit.html" />
+    <Content Include="App\partials\Tetris.html" />
+    <Content Include="App\TetrisCtrl.js" />
     <Content Include="App\PatternCopyCtrl.js" />
     <Content Include="App\PatternEditCtrl.js" />
     <Content Include="App\PatternSmallCtrl.js" />

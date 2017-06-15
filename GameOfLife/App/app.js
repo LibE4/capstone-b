@@ -29,7 +29,12 @@ app.config(function ($routeProvider) {
         	controller: 'PatternCtrl',
         	resolve: { isAuth }
         })
-		.when('/pattern/all', {
+        .when('/tetris', {
+            templateUrl: 'App/partials/Tetris.html',
+            controller: 'TetrisCtrl',
+            resolve: { isAuth }
+        })
+        .when('/pattern/all', {
 		    templateUrl: 'App/partials/PatternAll.html',
 		    controller: 'PatternAllCtrl',
 		    resolve: { isAuth }
