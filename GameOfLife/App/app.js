@@ -14,9 +14,9 @@ app.config(function ($routeProvider) {
 		    templateUrl: 'App/partials/auth.html',
 		    controller: 'AuthCtrl'
 		})
-		.when('/chat', {
-		    templateUrl: 'App/partials/chat.html',
-		    controller: 'ChatCtrl',
+		.when('/home', {
+		    templateUrl: 'App/partials/Home.html',
+		    controller: 'HomeCtrl',
 		    resolve: { isAuth }
 		})
         .when('/pattern/edit/:id', {
@@ -43,9 +43,5 @@ app.config(function ($routeProvider) {
 		    templateUrl: 'App/partials/auth.html',
 		    controller: 'AuthCtrl'
 		})
-        .when('/base', {
-            templateUrl: 'App/partials/home.html',
-            controller: 'HomeCtrl'
-        })
 		.otherwise('/auth');
 });

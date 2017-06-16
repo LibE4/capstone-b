@@ -66,7 +66,7 @@ namespace GameOfLife.Hubs
         {
             string userId = Context.ConnectionId;
             loggedInUsers.FirstOrDefault(x => x.ConnectionId == userId).status = status;
-            Clients.Others.statusChanged(userId, status);
+            Clients.All.statusChanged(userId, status);
 
         }
         public void UserTyping(string connectionId, string msg)

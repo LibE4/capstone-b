@@ -79,7 +79,7 @@ app.controller("PatternCtrl", ['$scope', '$http', '$location', '$rootScope', fun
         }
         Game.canvas = document.getElementById('myBigCanvas');
         Game.ctx = myBigCanvas.getContext('2d');
-        Game.run();
+        Game.run(worldArr);
     };
 
     $scope.inputShow = false;
@@ -154,7 +154,7 @@ app.controller("PatternCtrl", ['$scope', '$http', '$location', '$rootScope', fun
     Game.canvas = document.getElementById('myBigCanvas');
     Game.ctx = myBigCanvas.getContext('2d');
 
-    Game.run = function () {
+    Game.run = function (worldArr) {
         // Clear the canvas.
         Game.ctx.fillStyle = "black";
         Game.ctx.fillRect(0, 0, Game.canvas.width, Game.canvas.height);
@@ -203,24 +203,7 @@ app.controller("PatternCtrl", ['$scope', '$http', '$location', '$rootScope', fun
         if ((connection.id == fromCID && $scope.runMode)
             || (connection.id != fromCID && $scope.viewMode)) {
             // Clear the canvas.
-            Game.ctx.fillStyle = "black";
-            Game.ctx.fillRect(0, 0, Game.canvas.width, Game.canvas.height);
-            // draw vertical helping lines
-            Game.ctx.setLineDash([2, 18]);
-            Game.ctx.strokeStyle = '#CCCECB';
-            for (let i = 1; i < nGridX; i++) {
-                Game.ctx.beginPath();
-                Game.ctx.moveTo(i * gridSize, 0);
-                Game.ctx.lineTo(i * gridSize, 500);
-                Game.ctx.stroke();
-                Game.ctx.beginPath();
-                Game.ctx.moveTo(0, i * gridSize);
-                Game.ctx.lineTo(500, i * gridSize);
-                Game.ctx.stroke();
-            }
-            Game.ctx.setLineDash([]);
-            Game.ctx.strokeStyle = 'black';
-            drawGameArea(world);
+            Game.run(world);
             $scope.$apply();
         }
     });

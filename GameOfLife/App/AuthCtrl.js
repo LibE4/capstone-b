@@ -43,7 +43,7 @@ app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
             }
         })
         .then(function (result) {
-            console.log("result", result);
+            $scope.loginUser({ username: registerNewUser.username, password: registerNewUser.password });
         });
     };
 
@@ -67,7 +67,7 @@ app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
             $http.defaults.headers.common['Authorization'] = `bearer ${result.data.access_token}`;
             $rootScope.connection = $.hubConnection();
             $rootScope.chatHubProxy = $rootScope.connection.createHubProxy('ChatHub');
-            $location.url("/base");
+            $location.url("/home");
         });
     };
 

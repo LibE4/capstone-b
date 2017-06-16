@@ -3,10 +3,6 @@ app.controller("NavCtrl", ["$scope", "$rootScope", "$location", function ($scope
     $scope.navItems = [
 
 		{
-		    name: "Chat",
-		    url: "/chat"
-		},
-		{
 		    name: "Tetris",
 		    url: "/tetris"
 		},
@@ -17,6 +13,10 @@ app.controller("NavCtrl", ["$scope", "$rootScope", "$location", function ($scope
 		{
 		    name: "New Pattern",
 		    url: "/pattern"
+		},
+		{
+		    name: "Home",
+		    url: "/home"
 		}
     ];
 
