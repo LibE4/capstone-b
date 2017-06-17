@@ -40,6 +40,7 @@
     // open PrivateMessage($index) window
     $scope.PrivateMessage = function (index) {
         var user = $scope.OnlineUsers[index];
+        if (user.ConnectionId === connection.id) return;
         $scope.ShowPrivateWindow = true;
         $scope.isBroadcastOn = false;
         $scope.UserInPrivateChat = user;

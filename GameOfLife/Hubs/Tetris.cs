@@ -327,7 +327,7 @@ namespace GameOfLife.Hubs
 
         public bool rotateClearance(Shape currentShape, string[][] gameArea)
         {
-            if ((currentShape.dx + currentShape.dw > nGridX) || (currentShape.dy + currentShape.dh > nGridY))
+            if ((currentShape.dx + currentShape.dh > nGridX) || (currentShape.dy + currentShape.dw > nGridY))
             {
                 return false;
             }
