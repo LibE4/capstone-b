@@ -51,6 +51,23 @@ namespace GameOfLife.Hubs
             Clients.Caller.getOnlineUsers(sJSON);
         }
 
+        public void Logoff(string name)
+        {
+            var users = loggedInUsers.ToArray();
+            var len = users.Length;
+            for (int i = 0; i < len; i++)
+            {
+                if (users[i].ConnectionId == Context.ConnectionId)
+                {
+                    loggedInUsers.RemoveAt(i);
+                    var oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                    string sJSON = oSerializer.Serialize(loggedInUsers);
+                    Clients.All.getOnlineUsers(sJSON);
+                    break;
+                }
+            }
+        }
+
         public void SendPrivateMessage(string toUserId, string message)
         {
             string fromUserId = Context.ConnectionId;

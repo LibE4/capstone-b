@@ -40,17 +40,17 @@ namespace GameOfLife.Hubs
         }
 
         [HubMethodName("StartTetrisSelfGame")]
-        public void StartTetrisSelfGame()
+        public void StartTetrisSelfGame(string playerName)
         {
             if (Tets.ContainsKey(Context.ConnectionId)) Tets[Context.ConnectionId].aTimer.Enabled = false;
-            Tets[Context.ConnectionId] = new Tetris(Context.ConnectionId, "self");
+            Tets[Context.ConnectionId] = new Tetris(Context.ConnectionId, "self", playerName);
         }
 
         [HubMethodName("StartAllTetrisGame")]
-        public void StartAllTetrisGame()
+        public void StartAllTetrisGame(string playerName)
         {
             if (Tets.ContainsKey(Context.ConnectionId)) Tets[Context.ConnectionId].aTimer.Enabled = false;
-            Tets[Context.ConnectionId] = new Tetris(Context.ConnectionId, "all");
+            Tets[Context.ConnectionId] = new Tetris(Context.ConnectionId, "all", playerName);
         }
 
         [HubMethodName("PauseTetrisGame")]

@@ -1,5 +1,10 @@
 ﻿
 app.controller("NavCtrl", ["$scope", "$rootScope", "$location", function ($scope, $rootScope, $location) {
+
+    //Hub
+    $rootScope.connection = $.hubConnection();
+    $rootScope.chatHubProxy = $rootScope.connection.createHubProxy('ChatHub');
+
     $scope.navItems = [
 
 		{
@@ -21,7 +26,9 @@ app.controller("NavCtrl", ["$scope", "$rootScope", "$location", function ($scope
     ];
 
     $scope.loadPartials = function (link) {
-        if (link == "/logout") {
+        if (link === "/logout") {
+            $rootScope.isLogin = false;
+            $rootScope.chatHubProxy.invoke('Logoff', $rootScope.user.userName);
             $rootScope.user = "";
         } 
         $location.url(link);

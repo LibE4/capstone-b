@@ -83,7 +83,7 @@ body .home-header h4{
         max-height: 300px;
         min-height: 300px;
         width: 278px;
-        bottom: 1%;
+        bottom: 3%;
         position: fixed;
         right: 200px;
         opacity: 1;
@@ -93,17 +93,10 @@ body .home-header h4{
         z-index: 88;
         height: auto;
         width: 181px;
-        bottom: 0%;
+        bottom: 3%;
         position: fixed;
         right: 0%;
         opacity: 1;
-    }
-
-    .alertBox {
-        bottom: 0px;
-        right: 0px;
-        position: fixed;
-        z-index: 111;
     }
 
     h3.media-heading {

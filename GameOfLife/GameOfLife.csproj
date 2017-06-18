@@ -306,8 +306,10 @@
   <ItemGroup>
     <Content Include="App\app.js" />
     <Content Include="App\AuthCtrl.js" />
+    <Content Include="App\ChatCtrl.js" />
     <Content Include="App\HomeCtrl.js" />
     <Content Include="App\game.css" />
+    <Content Include="App\partials\Chat.html" />
     <Content Include="App\partials\PatternEdit.html" />
     <Content Include="App\partials\Tetris.html" />
     <Content Include="App\TetrisCtrl.js" />

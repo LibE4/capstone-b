@@ -86,10 +86,8 @@ app.controller("PatternCtrl", ['$scope', '$http', '$location', '$rootScope', fun
     $scope.isSaveNew = true;
     $scope.initSave = function () {
         $scope.inputShow = true;
-            console.log($scope.patternName);
         if($scope.patternName !== undefined){
             $scope.isSaveNew = false;
-            console.log($scope.isSaveNew);
 
         }
     };
@@ -103,17 +101,14 @@ app.controller("PatternCtrl", ['$scope', '$http', '$location', '$rootScope', fun
         if ($scope.patternName !== "" && pattern_input.length > 0) {
             $http.get('/api/pattern')
                 .then(function (res) {
-                    for (var i = 0, len = res.data.length; i < len; i++) {
-                        console.log(res.data);
-                        if ($scope.patternName === res.data[i].Name) { $scope.isValid = false; break; }
-                        if (i === len - 1) {
-                            console.log("save", pattern_input);
-                            $http.post('/api/pattern', { "Name": $scope.patternName, "newPatternDetail": pattern_input })
-                                .then(function (res) {
-                                    $scope.newPattern = {};
-                                    pattern_input = [];
-                                    $location.url("/pattern/all");
-                                });
+                    let len = res.data.length;
+                    if (len ===0) storeInDB();
+                    else {
+                        for (var i = 0; i < len; i++) {
+                            if ($scope.patternName === res.data[i].Name) { $scope.isValid = false; break; }
+                            if (i === len - 1) {
+                                storeInDB();
+                            }
                         }
                     }
                 });
@@ -126,6 +121,14 @@ app.controller("PatternCtrl", ['$scope', '$http', '$location', '$rootScope', fun
         }, 3000);
     };
 
+    function storeInDB(){
+        $http.post('/api/pattern', { "Name": $scope.patternName, "newPatternDetail": pattern_input })
+                                .then(function (res) {
+                                    $scope.newPattern = {};
+                                    pattern_input = [];
+                                    $location.url("/pattern/all");
+                                });
+    }
     function getInputPosition() {
         pattern_input = [];
         for (let i = 1; i <= n * n; i++) {

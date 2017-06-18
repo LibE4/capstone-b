@@ -1,6 +1,4 @@
 ﻿app.controller("TetrisCtrl", function($scope, $rootScope, $location){
-    var thisPlayer = $rootScope.user.username;
-    $rootScope.tetris = {};
     const nGridX = 10, nGridY = 20, gridSize = 20;
     // for status of all drawBlocks
     var gameArea = [];
@@ -47,11 +45,13 @@
 
     var connection = $.hubConnection();
     var tetrisHubProxy = connection.createHubProxy('GameHub');
-    tetrisHubProxy.on('updateTetrisInPage', function (currentShape, world, rowBuildup, fromCID) {
+    tetrisHubProxy.on('updateTetrisInPage', function (currentShape, world, rowBuildup, fromCID, playerName, totalLines, totalShapes) {
         // stop processing if data from other connection id and view window not open
         if (connection.id === fromCID && $scope.playMode
             || connection.id !== fromCID && !$scope.playMode) {
-            console.log(connection.id, fromCID);
+            $scope.playerName = playerName;
+            $scope.totalLines = totalLines;
+            $scope.totalShapes = totalShapes;
             // Clear the canvas.
             Game.ctx.fillStyle = "black";
             Game.ctx.fillRect(0, 0, Game.canvas.width, Game.canvas.height);
@@ -82,8 +82,8 @@
     connection.start().done(function () {
         // Wire up Send button to the server.
         var startGame = function () {
-            if ($scope.selfMode) tetrisHubProxy.invoke('StartTetrisSelfGame');
-            else tetrisHubProxy.invoke('StartAllTetrisGame');
+            if ($scope.selfMode) tetrisHubProxy.invoke('StartTetrisSelfGame', $rootScope.user.userName);
+            else tetrisHubProxy.invoke('StartAllTetrisGame', $rootScope.user.userName);
         };
         var pauseGame = function () {
             tetrisHubProxy.invoke('PauseTetrisGame');

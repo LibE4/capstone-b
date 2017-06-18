@@ -52,12 +52,13 @@ namespace GameOfLife.Hubs
 
         private readonly IHubContext _hubContext;
         private string _userConnectonId;
+        private string _playerName;
         public System.Timers.Timer aTimer { get; set; }
 
         public Tetris()
         {
         }
-        public Tetris(string userConnectonId, string sendTo)
+        public Tetris(string userConnectonId, string sendTo, string playerName)
         {
             gameArea = new string[nGridY][];
             for (int r = 0; r < nGridY; r++)
@@ -71,6 +72,7 @@ namespace GameOfLife.Hubs
             currentShape = new Shape(3, 0, available_layouts[randomNum], available_colors[randomNum]);
             totalShapes = 1;
             _userConnectonId = userConnectonId;
+            _playerName = playerName;
             _hubContext = GlobalHost.ConnectionManager.GetHubContext<GameHub>();
             if (sendTo == "all")
             {
@@ -91,13 +93,13 @@ namespace GameOfLife.Hubs
         public void updateToSelf(object sender, EventArgs e)
         {
             Tick();
-            _hubContext.Clients.Client(_userConnectonId).updateTetrisInPage(currentShape, gameArea, rowBuildup, _userConnectonId);
+            _hubContext.Clients.Client(_userConnectonId).updateTetrisInPage(currentShape, gameArea, rowBuildup, _userConnectonId, _playerName, totalLines, totalShapes);
         }
 
         public void updateToAll(object sender, EventArgs e)
         {
             Tick();
-            _hubContext.Clients.All.updateTetrisInPage(currentShape, gameArea, rowBuildup, _userConnectonId);
+            _hubContext.Clients.All.updateTetrisInPage(currentShape, gameArea, rowBuildup, _userConnectonId, _playerName, totalLines, totalShapes);
         }
 
         public void Tick() // Passage of time
