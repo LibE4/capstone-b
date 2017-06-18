@@ -19,6 +19,7 @@
 </div>
 <div id="world" class="row" ng-show="runMode">
     <div id="canvasContainer" class="col-sm-6 col-sm-offset-2">
+        <h5>Passage: {{passage}}</h5>
         <canvas id='myBigCanvas' width="500" height="500"></canvas>
     </div>
     <div id="canvasCtrl" class="col-sm-4">
@@ -28,6 +29,9 @@
         <button class="btn btn-custom col-sm-4" ng-click="pauseGame()" ng-if="!paused">Pause</button>
         <button class="btn btn-custom col-sm-4" ng-click="pauseGame()" ng-if="paused">Resume</button>
         <button class="btn btn-custom col-sm-4" ng-click="stopGame()">Stop</button>
+        <button class="btn btn-custom col-sm-4" ng-click="speedUp()">Speed Up</button>
+        <button class="btn btn-custom col-sm-4" ng-click="resetSpeed()">Reset</button>
+        <button class="btn btn-custom col-sm-4" ng-click="speedDown()">Speed Down</button>
         <button class="btn btn-custom col-sm-4" ng-click="changeMode()" ng-if="!selfMode">SelfMode</button>
         <button class="btn btn-custom col-sm-4" ng-click="changeMode()" ng-if="selfMode">Broadcast</button>
         <button class="btn btn-custom col-sm-8" ng-click="closeRunMode()">Back To Pattern</button>

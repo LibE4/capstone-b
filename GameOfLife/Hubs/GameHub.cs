@@ -39,6 +39,24 @@ namespace GameOfLife.Hubs
             if (Worlds.ContainsKey(Context.ConnectionId)) Worlds[Context.ConnectionId].aTimer.Enabled = false;
         }
 
+        [HubMethodName("SpeedUp")]
+        public void SpeedUp()
+        {
+            if (Worlds.ContainsKey(Context.ConnectionId)) Worlds[Context.ConnectionId].aTimer.Interval /= 2;
+        }
+
+        [HubMethodName("SpeedDown")]
+        public void SpeedDown()
+        {
+            if (Worlds.ContainsKey(Context.ConnectionId)) Worlds[Context.ConnectionId].aTimer.Interval *= 2;
+        }
+
+        [HubMethodName("ResetSpeed")]
+        public void ResetSpeed()
+        {
+            if (Worlds.ContainsKey(Context.ConnectionId)) Worlds[Context.ConnectionId].aTimer.Interval = 200;
+        }
+
         [HubMethodName("StartTetrisSelfGame")]
         public void StartTetrisSelfGame(string playerName)
         {

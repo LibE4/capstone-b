@@ -18,6 +18,7 @@ namespace GameOfLife.Hubs
         public List<string> about_to_born = new List<string>(); // List of cells marked to born
         private readonly IHubContext _hubContext;
         private string _userConnectonId;
+        private int passage = 0;
         public System.Timers.Timer aTimer { get; set; }
 
         public World()
@@ -53,13 +54,13 @@ namespace GameOfLife.Hubs
 	    public void updateToSelf(object sender, EventArgs e)
         {
             Tick();
-            _hubContext.Clients.Client(_userConnectonId).addNewGameDataToPage(worldArr, _userConnectonId);
+            _hubContext.Clients.Client(_userConnectonId).addNewGameDataToPage(worldArr, passage, _userConnectonId);
         }
 
         public void updateToAll(object sender, EventArgs e)
         {
             Tick();
-            _hubContext.Clients.All.addNewGameDataToPage(worldArr, _userConnectonId);
+            _hubContext.Clients.All.addNewGameDataToPage(worldArr, passage, _userConnectonId);
         }
 
         public void Tick() // Passage of time
@@ -73,6 +74,7 @@ namespace GameOfLife.Hubs
             BirthCells();
             about_to_die = new List<string>();
             about_to_born = new List<string>();
+            passage++;
         }
 
         private void BirthCells()

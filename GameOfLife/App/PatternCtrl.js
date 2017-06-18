@@ -65,6 +65,11 @@ app.controller("PatternCtrl", ['$scope', '$http', '$location', '$rootScope', fun
     };
 
     $scope.loadPattern = function () {
+        for (let r = 0; r < nGridY; r++) {
+            for (let c = 0; c < nGridX; c++) {
+                worldArr[r][c] = 0;
+            }
+        } // pre clear worldArr
         getInputPosition();
         $scope.runMode = true;
         $scope.viewMode = false;
@@ -201,16 +206,18 @@ app.controller("PatternCtrl", ['$scope', '$http', '$location', '$rootScope', fun
 
     var connection = $.hubConnection();
     var gameHubProxy = connection.createHubProxy('GameHub');
-    gameHubProxy.on('addNewGameDataToPage', function (world, fromCID) {
+    $scope.passage = 0;
+    gameHubProxy.on('addNewGameDataToPage', function (world, passage, fromCID) {
         // stop processing if data from other connection id and view window not open
         if ((connection.id == fromCID && $scope.runMode)
             || (connection.id != fromCID && $scope.viewMode)) {
-            // Clear the canvas.
+            $scope.passage = passage;
             Game.run(world);
             $scope.$apply();
         }
     });
 
+    var nSpeedUP = 0, nSpeedDown = 0;
     connection.start().done(function () {
         // Wire up Send button to the server.
         $scope.startGame = function () {
@@ -224,8 +231,26 @@ app.controller("PatternCtrl", ['$scope', '$http', '$location', '$rootScope', fun
             gameHubProxy.invoke('PauseGame');
         };
         $scope.stopGame = function () {
-            $scope.paused = false;
+            $scope.paused = true;
             gameHubProxy.invoke('StopGame');
+        };
+        $scope.speedUp = function () {
+            if (nSpeedUP >= 5) return;
+            gameHubProxy.invoke('SpeedUp');
+            nSpeedUP++;
+            nSpeedDown--;
+        };
+        $scope.speedDown = function () {
+            if (nSpeedDown >= 5) return;
+            gameHubProxy.invoke('SpeedDown');
+            nSpeedDown++;
+            nSpeedUP--;
+        };
+        $scope.resetSpeed = function () {
+            if (nSpeedUP === 0 || nSpeedDown === 0) return;
+            gameHubProxy.invoke('ResetSpeed');
+            nSpeedUP = 0;
+            nSpeedDown = 0;
         };
         $scope.closeRunMode = function () {
             $scope.runMode = false;
