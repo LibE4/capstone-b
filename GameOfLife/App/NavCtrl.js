@@ -1,22 +1,34 @@
 ﻿
 app.controller("NavCtrl", ["$scope", "$rootScope", "$location", function ($scope, $rootScope, $location) {
+
+    //Hub
+    $rootScope.connection = $.hubConnection();
+    $rootScope.chatHubProxy = $rootScope.connection.createHubProxy('ChatHub');
+
     $scope.navItems = [
+
 		{
-		    name: "Logout",
-		    url: "/logout"
+		    name: "Tetris",
+		    url: "/tetris"
 		},
 		{
 		    name: "All Patterns",
-		    url: "/pattern/list"
+		    url: "/pattern/all"
 		},
 		{
 		    name: "New Pattern",
-		    url: "/pattern/new"
+		    url: "/pattern"
+		},
+		{
+		    name: "Home",
+		    url: "/home"
 		}
     ];
 
     $scope.loadPartials = function (link) {
-        if (link == "/logout") {
+        if (link === "/logout") {
+            $rootScope.isLogin = false;
+            $rootScope.chatHubProxy.invoke('Logoff', $rootScope.user.userName);
             $rootScope.user = "";
         } 
         $location.url(link);

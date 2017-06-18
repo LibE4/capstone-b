@@ -16,37 +16,91 @@
   -webkit-font-smoothing: antialiased; }
 
 html, body {
-  height: 100%; }
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 body {
+  color: #CCCECB;
   background-color: #202020; }
 body h1, body h2 {
-  color: #CCCECB;
   text-align: center; }
 body .row {
   margin: 0;
   padding: 0; }
+body #auth {
+    margin-top: 3em;
+    border-radius: 3px;
+}
+body .navbar {
+    background-color: #889a78;
+    margin-bottom: 0; }
+body .navbar .navbar-brand {
+    color: rgba(0, 0, 0, 0.5);
+    font-style: italic;
+    font-size: 1.5em;
+    font-weight: bold; }
+body .navbar .navbar-nav > li > a {
+    color: #CCCECB;
+    font-weight: bold; }
+body .home-header h3 {
+    font-weight: bold;
+    }
+body .home-header h4{
+    font-weight: bold;
+    margin-top: 3em;
+}
 #ttt {
       background: #FFA700;
-      border: 2x ridge white;
-      width: 240px;
-      height: 240px;
+      width: 600px;
+      height: 600px;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: space-between;
       align-content: space-between;
-      padding: 1em; }
+      padding: 0.5em; 
+    }
 #ttt .blocks {
       box-sizing: border-box;
-      border: 1px solid black;
-      margin: auto;
-      text-align: center; }
-body #sg-container .blocks:before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  height: 100%; }
-body #sg-container .messages-card {
-  margin-top: 0; }
+      border: 1px solid white;
+      margin: auto;}
 
+/*chat*/
+    .reveal .fa {
+        font-family: 'FontAwesome';
+        font-style: normal;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 1px;
+    }
+
+    #PrivateChatArea {
+        z-index: 44;
+        max-height: 300px;
+        min-height: 300px;
+        width: 278px;
+        bottom: 3%;
+        position: fixed;
+        right: 200px;
+        opacity: 1;
+    }
+
+    #OnlineUsers {
+        z-index: 88;
+        height: auto;
+        width: 181px;
+        bottom: 3%;
+        position: fixed;
+        right: 0%;
+        opacity: 1;
+    }
+
+    h3.media-heading {
+        font-size: 11px;
+        font-family: 'Comic Sans MS';
+        float: left;
+    }

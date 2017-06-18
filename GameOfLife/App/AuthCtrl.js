@@ -2,8 +2,11 @@
 app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
     $scope.loginContainer = true;
     $scope.registerContainer = false;
-
     $scope.register = {};
+
+    var connection = $rootScope.connection;
+    var chatHubProxy = $rootScope.chatHubProxy;
+
     $scope.register.username = 'b@b.com';
     $scope.register.email = 'b@b.com';
     $scope.register.password = '123456Nss!';
@@ -13,7 +16,8 @@ app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
     $scope.login.username = 'b@b.com';
     $scope.login.password = '123456Nss!';
 
-    if ($location.path() == "/logout") {
+    if ($location.path() === "/logout") {
+
         sessionStorage.removeItem('token');
         $http.defaults.headers.common['Authorization'] = "";
         $rootScope = {};
@@ -43,12 +47,11 @@ app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
             }
         })
         .then(function (result) {
-            console.log("result", result);
+            $scope.loginUser({ username: registerNewUser.username, password: registerNewUser.password });
         });
     };
 
     $scope.loginUser = function (login) {
-            console.log("hhh");
         $http({
             method: 'POST',
             url: "/Token",
@@ -66,7 +69,14 @@ app.controller("AuthCtrl", function ($scope, $rootScope, $location, $http) {
             sessionStorage.setItem('token', result.data.access_token);
             $rootScope.user = result.data;
             $http.defaults.headers.common['Authorization'] = `bearer ${result.data.access_token}`;
-            $location.url("/game");
+
+            // chat login
+            connection.start().done(function () {
+                chatHubProxy.invoke('Login', $rootScope.user.userName);
+            });
+            $rootScope.isLogin = true;
+
+            $location.url("/home");
         });
     };
 

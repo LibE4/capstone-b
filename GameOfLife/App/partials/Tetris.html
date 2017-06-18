@@ -1,0 +1,101 @@
+﻿    <div class="row">
+        <header id="header" class="col-sm-2 col-sm-offset-5">
+            <h3>Tetris Game</h3>
+        </header>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="col-sm-10 col-sm-offset-1">
+                <table class="table table-striped table-key-info alert-success">
+                    <thead>
+                        <tr>
+                            <td>KEY</td>
+                            <td>ACTION</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Enter</td>
+                            <td>: start game</td>
+                        </tr>
+                        <tr>
+                            <td>P</td>
+                            <td>: pause game</td>
+                        </tr>
+                        <tr>
+                            <td>N</td>
+                            <td>: restart game</td>
+                        </tr>
+                        <tr>
+                            <td>W</td>
+                            <td>: rotate counter clockwise</td>
+                        </tr>
+                        <tr>
+                            <td>R</td>
+                            <td>: rotate clockwise</td>
+                        </tr>
+                        <tr>
+                            <td>Left Arrow</td>
+                            <td>: move left</td>
+                        </tr>
+                        <tr>
+                            <td>Right Arrow</td>
+                            <td>: move right</td>
+                        </tr>
+                        <tr>
+                            <td>Down Arrow</td>
+                            <td>: move down</td>
+                        </tr>
+                        <tr>
+                            <td>Spacebar</td>
+                            <td>: drop to bottom</td>
+                        </tr>
+                        <tr>
+                            <td>Up Arrow</td>
+                            <td>: move up</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="tetris-center-area" class="col-sm-4" ng-show="playMode">
+            <div id="canvasContainer" class="col-sm-8 col-sm-offset-2">
+                <canvas id='myTetrisCanvas' width="200" height="400"></canvas>
+            </div>
+            <div class="btn btn-success col-sm-12" ng-if="selfMode">Self Mode is ON!</div>
+            <div class="btn btn-success col-sm-12" ng-if="!selfMode">Broadcast Mode is ON!</div>
+            <button class="btn btn-custom col-sm-6" ng-click="changeMode()">Change Mode</button>
+            <button class="btn btn-custom col-sm-6" ng-click="goView()">View Broadcast</button>
+        </div>
+        <div id="view-tetris-center-area" class="col-sm-4" ng-hide="playMode">
+            <div id="view-canvasContainer" class="col-sm-8 col-sm-offset-2">
+                <canvas id='viewTetrisCanvas' width="200" height="400"></canvas>
+            </div>
+            <div class="btn btn-success col-sm-12">You are watching Broadcast!</div>
+            <button class="btn btn-custom col-sm-12" ng-click="goPlay()">Back To Play</button>
+        </div>
+        <div class="col-sm-4 alert-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span id="username">{{playerName}}</span></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic" ng-src="{{user.icon}}" class="img-rounded img-responsive"> </div>
+                    <div class="col-md-9 col-lg-9">
+                        <table class="table table-striped table-user-information">
+                            <tbody>
+                                <tr>
+                                    <td>LINE FILLED:</td>
+                                    <td><span id="wins">{{totalLines}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>CURRENT SHAPE:</td>
+                                    <td><span id="balance">{{totalShapes}}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+

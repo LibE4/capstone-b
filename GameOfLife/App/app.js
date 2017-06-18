@@ -14,17 +14,32 @@ app.config(function ($routeProvider) {
 		    templateUrl: 'App/partials/auth.html',
 		    controller: 'AuthCtrl'
 		})
-		.when('/game', {
-		    templateUrl: 'App/partials/game.html',
-		    controller: 'GameCtrl',
+		.when('/home', {
+		    templateUrl: 'App/partials/Home.html',
+		    controller: 'HomeCtrl',
 		    resolve: { isAuth }
 		})
-        .when('/pattern/new', {
-        	templateUrl: 'App/partials/PatternNew.html',
-        	controller: 'PatternNewCtrl',
+        .when('/pattern/edit/:id', {
+		    templateUrl: 'App/partials/PatternEdit.html',
+		    controller: 'PatternEditCtrl',
+		    resolve: { isAuth }
+		})
+        .when('/pattern', {
+        	templateUrl: 'App/partials/Pattern.html',
+        	controller: 'PatternCtrl',
         	resolve: { isAuth }
         })
-		.when('/logout', {
+        .when('/tetris', {
+            templateUrl: 'App/partials/Tetris.html',
+            controller: 'TetrisCtrl',
+            resolve: { isAuth }
+        })
+        .when('/pattern/all', {
+		    templateUrl: 'App/partials/PatternAll.html',
+		    controller: 'PatternAllCtrl',
+		    resolve: { isAuth }
+		})
+        .when('/logout', {
 		    templateUrl: 'App/partials/auth.html',
 		    controller: 'AuthCtrl'
 		})
