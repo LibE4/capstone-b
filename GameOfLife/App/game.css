@@ -1,38 +1,39 @@
 ﻿.btn-custom {
-  background-color: #37493c !important;
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d3ded6", endColorstr="#36483b");
-  background-image: -khtml-gradient(linear, left top, left bottom, from(#d3ded6), to(#36483b));
-  background-image: -moz-linear-gradient(top, #d3ded6, #36483b);
-  background-image: -ms-linear-gradient(top, #d3ded6, #36483b);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d3ded6), color-stop(100%, #36483b));
-  background-image: -webkit-linear-gradient(top, #d3ded6, #36483b);
-  background-image: -o-linear-gradient(top, #d3ded6, #36483b);
-  background-image: linear-gradient(#d3ded6, #36483b);
-  border-color: #36483b #36483b #161d18;
-  color: #333 !important;
-  font-weight: bold !important;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.99);
-  -webkit-font-smoothing: antialiased; }
+    background-color: #37493c !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d3ded6", endColorstr="#36483b");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#d3ded6), to(#36483b));
+    background-image: -moz-linear-gradient(top, #d3ded6, #36483b);
+    background-image: -ms-linear-gradient(top, #d3ded6, #36483b);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d3ded6), color-stop(100%, #36483b));
+    background-image: -webkit-linear-gradient(top, #d3ded6, #36483b);
+    background-image: -o-linear-gradient(top, #d3ded6, #36483b);
+    background-image: linear-gradient(#d3ded6, #36483b);
+    border-color: #36483b #36483b #161d18;
+    color: #333 !important;
+    font-weight: bold !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.99);
+    -webkit-font-smoothing: antialiased; }
 
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  color: #CCCECB;
-  background-color: #202020; }
-body h1, body h2 {
-  text-align: center; }
+    color: #CCCECB;
+    background-color: #202020; }
+body h1, body h2, body header {
+    text-align: center; }
 body .row {
-  margin: 0;
-  padding: 0; }
+    margin: 0;
+    padding: 0; }
 body #auth {
-    margin-top: 3em;
-    border-radius: 3px;
-}
+    margin-top: 5em;
+    border-radius: 5px; }
+body #auth label {
+    margin-left: 3em; }
 body .navbar {
     background-color: #889a78;
     margin-bottom: 0; }
@@ -44,63 +45,80 @@ body .navbar .navbar-brand {
 body .navbar .navbar-nav > li > a {
     color: #CCCECB;
     font-weight: bold; }
-body .home-header h3 {
-    font-weight: bold;
-    }
-body .home-header h4{
-    font-weight: bold;
-    margin-top: 3em;
-}
+body #home-header {
+    padding-bottom: 2em;
+    margin-bottom: 3em;
+    border-bottom: 3px solid #CCCECB; }
+body #home .row {
+    margin-top: 3em; }
 #ttt {
-      background: #FFA700;
-      width: 600px;
-      height: 600px;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-content: space-between;
-      padding: 0.5em; 
+    background: #FFA700;
+    width: 600px;
+    height: 600px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    padding: 0.5em; 
     }
 #ttt .blocks {
-      box-sizing: border-box;
-      border: 1px solid white;
-      margin: auto;}
+    box-sizing: border-box;
+    border: 1px solid white;
+    margin: auto;}
+body #tetris-container .row {
+    margin-bottom: 3em; }
+body #tetris-container .table-key-info {
+    border-radius: 3px;
+    background-color: #CCCECB;
+    font-weight: bold; }
+body #tetris-container #username {
+    margin-left: 2em; }
+body #tetris-container thead {
+    background-color: #5CA61E;
+    color: #CCCECB; }
+#myTetrisCanvas, #viewTetrisCanvas {
+    background-color: black;
+    border: 3px solid grey;
+    margin: 0 auto; }
+body #tetris-container .panel-title {
+    text-align: center;
+    background-color: #CCCECB; }
 
 /*chat*/
-    .reveal .fa {
-        font-family: 'FontAwesome';
-        font-style: normal;
-    }
+.reveal .fa {
+    font-family: 'FontAwesome';
+    font-style: normal;
+}
 
-    ul {
-        list-style: none;
-        padding-left: 1px;
-    }
+ul {
+    list-style: none;
+    padding-left: 1px;
+}
 
-    #PrivateChatArea {
-        z-index: 44;
-        max-height: 300px;
-        min-height: 300px;
-        width: 278px;
-        bottom: 3%;
-        position: fixed;
-        right: 200px;
-        opacity: 1;
-    }
+#PrivateChatArea {
+    z-index: 44;
+    max-height: 300px;
+    min-height: 300px;
+    width: 278px;
+    bottom: 3%;
+    position: fixed;
+    right: 200px;
+    opacity: 1;
+}
 
-    #OnlineUsers {
-        z-index: 88;
-        height: auto;
-        width: 181px;
-        bottom: 3%;
-        position: fixed;
-        right: 0%;
-        opacity: 1;
-    }
+#OnlineUsers {
+    z-index: 88;
+    height: auto;
+    width: 200px;
+    bottom: 3%;
+    position: fixed;
+    right: 0%;
+    opacity: 1;
+}
 
-    h3.media-heading {
-        font-size: 11px;
-        font-family: 'Comic Sans MS';
-        float: left;
-    }
+h3.media-heading {
+    font-size: 11px;
+    font-family: 'Comic Sans MS';
+    float: left;
+}

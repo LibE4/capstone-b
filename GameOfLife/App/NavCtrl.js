@@ -6,7 +6,10 @@ app.controller("NavCtrl", ["$scope", "$rootScope", "$location", function ($scope
     $rootScope.chatHubProxy = $rootScope.connection.createHubProxy('ChatHub');
 
     $scope.navItems = [
-
+		{
+		    name: "Chat",
+		    url: "#/Chat"
+		},
 		{
 		    name: "Tetris",
 		    url: "/tetris"
@@ -26,6 +29,10 @@ app.controller("NavCtrl", ["$scope", "$rootScope", "$location", function ($scope
     ];
 
     $scope.loadPartials = function (link) {
+        if (link === "#/chat") {
+            $rootScope.ShowOnlineUserWindow = true;
+            return;
+        }
         if (link === "/logout") {
             $rootScope.isLogin = false;
             $rootScope.chatHubProxy.invoke('Logoff', $rootScope.user.userName);

@@ -1,24 +1,14 @@
-﻿<div class="row">
-    <header id="header" class="col-sm-3 col-sm-offset-5">
-        <h3>Secret Playground</h3>
+﻿<div id="home" class="col-sm-8 col-sm-offset-2">
+    <header id="home-header">
+        <h1>Welcome to this fun website, <span id="username">{{currentUser.userName}}</span>!</h1>
     </header>
-</div>
 
-<div class="row">
-    <div class="home-header col-sm-6 col-sm-offset-3 alert-success">
-        <h3>Welcom to this fun website, <span id="username">{{currentUser.userName}}</span>!</h3>
-        <div class="col-sm-offset-1">
-            <h4>In a wrold run on Conway's rules, can your creatures survive?</h4>
-        </div>
-        <div class="col-sm-offset-2">
-            <h4>Sharpen you Tetris skills and share with your friends!</h4>
-        </div>
-        <div class="col-sm-offset-3">
-            <h4>Always stay connected!</h4>
-        </div>
-        <div class="col-sm-offset-4">
-            <h4>It is time to start your joyful journey...</h4>
+    <div class="game-set" ng-repeat="item in worldGame" ng-mouseover="item[$index]=true" ng-mouseleave="item[$index]=false">
+        <div class="row">
+            <a class="btn btn-lg btn-custom col-sm-8 col-sm-offset-2" ng-click="loadLinks(item.url)">{{item.name}}</a>
+            <div class="caption col-sm-8 col-sm-offset-2" ng-show="item[$index]">
+                {{item.description}}
+            </div>
         </div>
     </div>
-
 </div>

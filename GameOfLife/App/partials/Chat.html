@@ -2,7 +2,7 @@
 
 <div class="row" ng-controller="ChatCtrl">
 
-    <div id="OnlineUsers" ng-show="user">
+    <div id="OnlineUsers" ng-show="user && ShowOnlineUserWindow">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <span class="fa fa-users"></span>&nbsp; &nbsp; Online[{{OnlineUsers.length}}]
@@ -43,6 +43,9 @@
                             </a>
                         </li>
                     </ul>
+                    <button type="button" class="btn btn-default btn-sm" ng-click="CloseOnlineUserWindow()">
+                        <span class="glyphicon glyphicon-remove"> </span>
+                    </button>
                 </div>
             </div>
             <div class="panel-body" style="min-height:100px; max-height:600px;" ng-class="">
