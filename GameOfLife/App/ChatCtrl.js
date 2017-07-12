@@ -53,7 +53,10 @@
         $scope.ShowPrivateWindow = false;
         $scope.UserInPrivateChat = null;
     };
-        $scope.SendPrivateMessage = function () {
+    $scope.CloseOnlineUserWindow = function () {
+        $rootScope.ShowOnlineUserWindow = false;
+    };
+    $scope.SendPrivateMessage = function () {
             chatHubProxy.invoke('SendPrivateMessage', $scope.UserInPrivateChat.ConnectionId, $scope.pvtmessage);
             $scope.pvtmessage = '';
         };
